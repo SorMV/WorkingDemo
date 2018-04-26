@@ -6,6 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,12 +34,12 @@ class ReservationRestController {
 
 	private final ReservationRepository reservationRepository;
 
-	@Autowired
+    @Autowired
 	public ReservationRestController(ReservationRepository reservationRepository) {
 		this.reservationRepository = reservationRepository;
 	}
 
-	@RequestMapping (method = RequestMethod.GET, value = "/reservations")
+	@RequestMapping (method = RequestMethod.GET, value = "/app")
 	Collection<Reservation> reservations(){
 		return this.reservationRepository.findAll();
 	}
@@ -63,8 +66,10 @@ class RepositoryCommandLineRunner implements CommandLineRunner {
 		this.reservationRepository = reservationRepository;
 	}
 }
-
+//@RepositoryRestResource
 interface ReservationRepository extends JpaRepository<Reservation, Long> {
-	Collection<Reservation> findByReservationName(String rn);
+
+//    @RestResource(path = "by-name")
+	Collection<Reservation> findByReservationName(@Param("rn") String rn);
 
 }
