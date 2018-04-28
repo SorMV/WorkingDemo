@@ -110,7 +110,6 @@ class ReservationUI extends UI {
 		table.setContainerDataSource(new BeanItemContainer<>(Reservation.class, this.reservationRepository.findAll()));
 		setContent(table);
 
-
 	}
 }
 
