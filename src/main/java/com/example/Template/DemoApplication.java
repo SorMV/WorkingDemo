@@ -60,7 +60,6 @@ class RepositoryCommandLineRunner implements CommandLineRunner {
 
 	private final ReservationRepository reservationRepository;
 
-
 	@Override
 	public void run(String... args) throws Exception {
 
